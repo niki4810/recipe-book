@@ -19,7 +19,7 @@ export default function RecipeCard({recipe}: {recipe: Pick<Recipe, "id" | "descr
           <span className="flex-1 text-xs font-bold text-gray-600">
             Duration {recipe.durationInMins} mins
           </span>
-          <span className="text-xs font-bold text-gray-500">
+          <span className="text-xs font-bold  text-gray-500">
             {new Date(recipe.createdAt).toDateString()}
           </span>
         </div>
