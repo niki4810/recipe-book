@@ -17,7 +17,7 @@ export async function getRecipesList({ userId }: { userId: User["id"] }) {
   });
 }
 
-export function getRecipe({
+export async function getRecipe({
   id,
   userId,
 }: Pick<Recipe, "id"> & {
@@ -34,4 +34,19 @@ export function getRecipe({
     },
     where: { id, userId },
   });
+}
+
+export async function createRecipe(
+  recipe: Pick<Recipe, "name" | "description" | "imageUrl" | "durationInMins">,
+  userId: User["id"]
+  ) {
+  return prisma.recipe.create({
+    data: {
+      name: recipe.name,
+      description: recipe.description,
+      imageUrl: recipe.imageUrl,
+      durationInMins: recipe.durationInMins,
+      userId: userId
+    }
+  })
 }

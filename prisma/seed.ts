@@ -27,7 +27,8 @@ async function seed() {
 
   // delete existing recipe along with its ingredients and instructions
   const recipe = await prisma.recipe.findFirst({where: {
-    name: "Mirchi Ka Salan - Test"
+    name: "Mirchi Ka Salan",
+    userId: user.id
   }});
 
   if(recipe) {
@@ -55,7 +56,7 @@ async function seed() {
   const recipeOne = await prisma.recipe.create({
     data: {
       imageUrl: "https://via.placeholder.com/200",
-      name: "Mirchi Ka Salan - Test",
+      name: "Mirchi Ka Salan",
       durationInMins: 60,
       description: "Authentic Telengana curry. Goes well with flavored rice",
       userId: user.id

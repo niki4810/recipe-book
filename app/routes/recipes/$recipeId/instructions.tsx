@@ -1,6 +1,6 @@
 import type { LoaderArgs, LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { useCatch, useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 import { getRecipeInstructions } from "~/models/recipe-instructions.server";
 
@@ -18,7 +18,11 @@ export const loader: LoaderFunction = async ({
   const { recipeId } = params;
   invariant(recipeId, "Recipe Id is required");
   const instructions = await getRecipeInstructions({ recipeId });
-  invariant(instructions, `Recipe Ingredients not found: ${recipeId}`);
+  if (!instructions || instructions.length === 0) {
+    throw new Response("No instructions have been added to this recipe yet", {
+      status: 404,
+    });
+  }
   return json<LoaderData>({ instructions });
 };
 
@@ -43,4 +47,21 @@ export default function RecipeInstructionsPage() {
       })}
     </div>
   );
+}
+
+// Expected Errors
+export function CatchBoundary() {
+  const caught = useCatch();
+  if (caught.status === 404) {
+    return <div className="text-sm text-gray-800">{caught.data}</div>;
+  }
+  throw new Error(`Unsupported thrown response status code: ${caught.status}`);
+}
+
+// UnExpected Errors
+export function ErrorBoundary({ error }: { error: Error }) {
+  if (error instanceof Error) {
+    return <div className="text-sm text-red-600">{error.message}</div>;
+  }
+  return <div className="text-sm text-red-600">Oh no, something went wrong!</div>;
 }
