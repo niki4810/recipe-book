@@ -3,7 +3,7 @@ import React from "react";
 
 export default function NewRecipePage() {
   const titleRef = React.useRef<HTMLInputElement>(null);
-  const actionData = {};
+  const actionData = { errors: {title: null, body: null}};
   return (
     <div className="flex flex-col gap-4">
       <h2 className="font-bold text-xl">Add Recipe</h2>
