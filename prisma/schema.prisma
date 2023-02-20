@@ -1,0 +1,83 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id    String @id @default(cuid())
+  email String @unique
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  password Password?
+  notes    Note[]
+  recipes Recipe[]
+}
+
+model Password {
+  hash String
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId String @unique
+}
+
+model Note {
+  id    String @id @default(cuid())
+  title String
+  body  String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId String
+}
+
+
+model Recipe {
+  id    String @id @default(cuid())
+  name String
+  description  String
+  imageUrl String
+  durationInMins Int @default(30)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId String
+  
+  ingredients RecipeIngredient[]
+  instructions RecipeInstruction[]
+}
+
+model RecipeIngredient {
+  id    String @id @default(cuid())
+  name  String
+  quantity String
+  unit String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  recipe   Recipe   @relation(fields: [recipeId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  recipeId String
+}
+
+model RecipeInstruction {
+  id    String @id @default(cuid())
+  description  String
+  stepNo Int 
+  imageUrl String @default("")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  recipe   Recipe   @relation(fields: [recipeId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  recipeId String
+}
