@@ -1,8 +1,16 @@
-
 import type { Recipe } from "@prisma/client";
 import { Link } from "@remix-run/react";
 
-export default function RecipeCard({recipe}: {recipe: Pick<Recipe, "id" | "description" | "createdAt" | "durationInMins" | "name" | "imageUrl">}) {
+export default function RecipeCard({
+  recipe,
+  isLink = true,
+}: {
+  recipe: Pick<
+    Recipe,
+    "id" | "description" | "createdAt" | "durationInMins" | "name" | "imageUrl"
+  >;
+  isLink: boolean;
+}) {
   return (
     <div className="flex items-center gap-2">
       <img
@@ -12,9 +20,16 @@ export default function RecipeCard({recipe}: {recipe: Pick<Recipe, "id" | "descr
               "
       />
       <div className="flex flex-1 flex-col px-2">
-        <Link to={recipe.id} className="text-md font-semibold text-sky-700">
-          {recipe.name}
-        </Link>
+        {isLink ? (
+          <Link to={recipe.id} className="text-md font-semibold text-sky-700">
+            {recipe.name}
+          </Link>
+        ) : (
+          <div className="text-md font-semibold text-sky-700">
+            {recipe.name}
+          </div>
+        )}
+
         <div className="my-1 flex items-center gap-1">
           <span className="flex-1 text-xs font-bold text-gray-600">
             Duration {recipe.durationInMins} mins

@@ -32,7 +32,7 @@ export default function RecipesIndexPage() {
               key={recipe.id}
               className="border--gray-800 shadow-sm max-w-120 rounded border p-2 bg-white"
             >
-              <RecipeCard recipe={recipe}></RecipeCard>
+              <RecipeCard recipe={recipe} isLink></RecipeCard>
             </div>
           );
         })}

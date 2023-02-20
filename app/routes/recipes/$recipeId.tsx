@@ -30,7 +30,7 @@ export default function RecipeDetailsPage() {
   return (
     <div className="flex flex-col gap-2">
       <div className="shadow-sm max-w-120 rounded border border--gray-800 p-2 bg-white">
-        <RecipeCard recipe={recipe}></RecipeCard>
+        <RecipeCard recipe={recipe} isLink={false}></RecipeCard>
       </div>
       <hr className="my-2 bg-gray-500" />
       <div className="flex gap-3">
