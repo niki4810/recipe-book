@@ -1,6 +1,6 @@
 import type { LoaderArgs, LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { NavLink, Outlet, useLoaderData } from "@remix-run/react";
+import { Link, NavLink, Outlet, useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 import RecipeCard from "~/components/recipe-card";
 import { getRecipe } from "~/models/recipes.server";
@@ -11,8 +11,8 @@ type LoaderData = {
   recipe: NonNullable<Awaited<ReturnType<typeof getRecipe>>>;
 };
 
-const navLinkActiveStyles = "text-sky-700 border-b-4 border-b-sky-700 capitalize text-sm font-semibold p-2";
-const navLinkStyles = "border-b-4 border-b-transparent capitalize text-sm font-semibold p-2"
+const navLinkActiveStyles = "text-sky-700 border-b-4 border-b-sky-700 capitalize text-sm font-semibold p-1";
+const navLinkStyles = "border-b-4 border-b-transparent capitalize text-sm font-semibold p-1"
 export const loader: LoaderFunction = async ({
   request,
   params,
@@ -29,15 +29,22 @@ export default function RecipeDetailsPage() {
   const { recipe } = useLoaderData() as unknown as LoaderData;
   return (
     <div className="flex flex-col gap-2">
-      <div className="shadow-sm max-w-120 rounded border border--gray-800 p-2 bg-white">
+      <div className="shadow-sm max-w-120 rounded border border--gray-800 p-2 bg-white flex flex-col gap-2">
         <RecipeCard recipe={recipe} isLink={false}></RecipeCard>
+        <div className="flex gap-2 items-center justify-end">
+          <Link to="ingredients/new" className="text-xs text-white bg-sky-600 hover:bg-sky-500 py-1 px-4 rounded">
+            Add Ingredient
+          </Link>
+          <Link to="instructions/new" className="text-xs text-white bg-sky-600 hover:bg-sky-500 py-1 px-4 rounded">
+            Add Instruction
+          </Link>
+        </div>
       </div>
-      <hr className="my-2 bg-gray-500" />
+      <hr className="h-px border-b border-b-gray-300 shadow-sm" />
       <div className="flex gap-3">
         <NavLink
-          to="."
-          end
-          className={({ isActive }) => {
+          to="ingredients"
+          className={({ isActive}) => {
             return isActive 
                 ? navLinkActiveStyles 
                 : navLinkStyles;
@@ -47,7 +54,6 @@ export default function RecipeDetailsPage() {
         </NavLink>
         <NavLink
           to="instructions"
-          end
           className={({ isActive }) => {
             return isActive 
                 ? navLinkActiveStyles 

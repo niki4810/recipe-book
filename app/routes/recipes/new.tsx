@@ -55,12 +55,12 @@ export default function NewRecipePage() {
   const isCreating = Boolean(transition.submission);
 
   return (
-    <div className="flex flex-col gap-4">
-      <h2 className="font-bold text-xl">Add Recipe</h2>
+    <div className="flex flex-col gap-4 pt-4">
+      <h2 className="font-bold text-md">Add Recipe</h2>
       <Form method="post" className="flex flex-col gap-2 w-100">
         <div>
           <label className="flex w-full flex-col gap-1">
-            <span>
+            <span className="text-sm">
               Name: {errors?.name ? (
                 <em className="text-red-600 ml-1">{errors.name}</em>
               ) : null}
@@ -73,7 +73,7 @@ export default function NewRecipePage() {
         </div>
         <div>
           <label className="flex w-full flex-col gap-1">
-            <span>Image:</span>
+            <span className="text-sm">Image:</span>
             <input
               name="imageUrl"
               className="flex-1 rounded-md border-2 border-sky-600 px-3 text-lg leading-loose"
@@ -82,7 +82,7 @@ export default function NewRecipePage() {
         </div>
         <div>
           <label className="flex w-full flex-col gap-1">
-            <span>Duration In Minutes: 
+            <span className="text-sm">Duration In Minutes: 
             {errors?.durationInMins ? (
                 <em className="text-red-600 ml-1">{errors.durationInMins}</em>
               ) : null}
@@ -96,7 +96,7 @@ export default function NewRecipePage() {
         </div>
         <div>
           <label className="flex w-full flex-col gap-1">
-            <span>Description: 
+            <span className="text-sm">Description: 
             {errors?.description ? (
                 <em className="text-red-600 ml-1">{errors.description}</em>
               ) : null}

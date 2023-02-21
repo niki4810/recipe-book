@@ -279,7 +279,7 @@ for(let instruction of instructionsOne) {
       description: instruction.description,
       recipeId: recipeOne.id
     }
-  })
+  });
 }
 
 
