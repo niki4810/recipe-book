@@ -1,5 +1,6 @@
 import type { Recipe } from "@prisma/client";
 import { Link } from "@remix-run/react";
+import React from "react";
 
 export default function RecipeCard({
   recipe,
