@@ -13,7 +13,7 @@ type LoaderData = {
 
 const commonStyles = `capitalize text-sm font-semibold px-2 py-1 border-b-2 rounded-tl rounded-tr`;
 const navLinkStyles = `border-b-transparent bg-gray-400/50 text-gray-800 ${commonStyles}`;
-const navLinkActiveStyles = `border-b-transparent text-sky-700 bg-sky-700 text-white ${commonStyles}`;
+const navLinkActiveStyles = `border-b-transparent bg-sky-600 text-white ${commonStyles}`;
 export const loader: LoaderFunction = async ({
   request,
   params,
