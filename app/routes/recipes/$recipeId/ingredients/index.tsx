@@ -28,22 +28,24 @@ export const loader: LoaderFunction = async ({
 export default function RecipeIngredientsPage() {
   const { ingredients } = useLoaderData() as unknown as LoaderData;
   return (
-    <ul className="mb-4 list-disc bg-white px-4 pl-6 pt-2 pb-2 text-sm">
-      {ingredients.map((ingredient) => {
-        return (
-          <li key={ingredient.id}>
-            <div className="flex items-center gap-2 p-1 text-sm">
-              <span className="capitalize text-gray-800">
-                {ingredient.name}
-              </span>
-              <span className="text-xs capitalize text-gray-500">
-                ({ingredient.quantity} {ingredient.unit})
-              </span>
-            </div>
-          </li>
-        );
-      })}
-    </ul>
+    <div className="mb-4 border border-gray-400/50 bg-white pr-4 pl-6 pt-2 pb-2 text-sm shadow flex flex-col">
+      <ul className="list-disc">
+        {ingredients.map((ingredient) => {
+          return (
+            <li key={ingredient.id}>
+              <div className="flex items-center gap-2 p-1 text-sm">
+                <span className="capitalize text-gray-800">
+                  {ingredient.name}
+                </span>
+                <span className="text-xs capitalize text-gray-500">
+                  ({ingredient.quantity} {ingredient.unit})
+                </span>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
   );
 }
 
@@ -61,5 +63,7 @@ export function ErrorBoundary({ error }: { error: Error }) {
   if (error instanceof Error) {
     return <div className="text-sm text-red-600">{error.message}</div>;
   }
-  return <div className="text-sm text-red-600">Oh no, something went wrong!</div>;
+  return (
+    <div className="text-sm text-red-600">Oh no, something went wrong!</div>
+  );
 }

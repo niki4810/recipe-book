@@ -21,16 +21,16 @@ export default function RecipesIndexPage() {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex justify-end">
-        <Link to="new" className="font-semibold text-sky-700">
+        <Link to="new" className="text-xs text-white bg-sky-600 hover:bg-sky-500 py-1 px-4 rounded">
           + New Recipe
         </Link>
       </div>
-      <div className="m-auto flex flex-col gap-4 pb-4">
+      <div className="flex flex-col gap-4 pb-4">
         {recipes.map((recipe) => {
           return (
             <div
               key={recipe.id}
-              className="border--gray-800 shadow-sm max-w-120 rounded border p-2 bg-white"
+              className="rounded border border-gray-400/50 p-2 bg-white flex flex-col gap-2 shadow"
             >
               <RecipeCard recipe={recipe} isLink></RecipeCard>
             </div>

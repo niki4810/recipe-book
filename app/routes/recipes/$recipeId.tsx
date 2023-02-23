@@ -11,8 +11,9 @@ type LoaderData = {
   recipe: NonNullable<Awaited<ReturnType<typeof getRecipe>>>;
 };
 
-const navLinkActiveStyles = "text-sky-700 border-b-4 border-b-sky-700 capitalize text-sm font-semibold p-1";
-const navLinkStyles = "border-b-4 border-b-transparent capitalize text-sm font-semibold p-1"
+const commonStyles = `capitalize text-sm font-semibold px-2 py-1 border-b-2 rounded-tl rounded-tr`;
+const navLinkStyles = `border-b-transparent bg-gray-400/50 text-gray-800 ${commonStyles}`;
+const navLinkActiveStyles = `border-b-transparent text-sky-700 bg-sky-700 text-white ${commonStyles}`;
 export const loader: LoaderFunction = async ({
   request,
   params,
@@ -29,7 +30,7 @@ export default function RecipeDetailsPage() {
   const { recipe } = useLoaderData() as unknown as LoaderData;
   return (
     <div className="flex flex-col gap-2">
-      <div className="shadow-sm max-w-120 rounded border border--gray-800 p-2 bg-white flex flex-col gap-2">
+      <div className="rounded border border-gray-400/50 p-2 bg-white flex flex-col gap-2 shadow">
         <RecipeCard recipe={recipe} isLink={false}></RecipeCard>
         <div className="flex gap-2 items-center justify-end">
           <Link to="ingredients/new" className="text-xs text-white bg-sky-600 hover:bg-sky-500 py-1 px-4 rounded">
@@ -40,8 +41,8 @@ export default function RecipeDetailsPage() {
           </Link>
         </div>
       </div>
-      <hr className="h-px border-b border-b-gray-300 shadow-sm" />
-      <div className="flex gap-3">
+      <hr className="h-px border-b-gray-300 border-b mt-2 mb-1" />
+      <div className="flex gap-px border-b border-b-gray-300">
         <NavLink
           to="ingredients"
           className={({ isActive}) => {

@@ -128,7 +128,7 @@ export default function AddIngreditentsPage() {
         <div className="text-right">
           <button
             type="submit"
-            className="rounded bg-blue-500 py-2 px-4 text-white hover:bg-blue-600 focus:bg-blue-400 disabled:bg-blue-300"
+            className="text-xs text-white bg-sky-600 hover:bg-sky-500 py-2 px-4 rounded  focus:bg-sky-400 disabled:bg-sky-300"
             disabled={isCreating}
           >
             {isCreating ? "Saving..." : "Save"}

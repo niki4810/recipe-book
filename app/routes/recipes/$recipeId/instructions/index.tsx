@@ -29,14 +29,13 @@ export const loader: LoaderFunction = async ({
 export default function RecipeInstructionsPage() {
   const { instructions } = useLoaderData() as unknown as LoaderData;
   return (
-    <div className="text-sm mb-4 flex flex-col gap-2.5">
+    <div className="text-sm mb-4 flex flex-col gap-2.5 border border-transparent">
       {instructions.map((instruction) => {
         return (
-          <div key={instruction.id} className="bg-white border 
-          border--gray-600 shadow-sm max-w-120 rounded p-2 snap-mandatory snap-y
+          <div key={instruction.id} className="bg-white border-gray-400/50 border shadow max-w-120 rounded p-2 snap-mandatory snap-y
           ">
             <div className="flex items-center gap-2">
-              <span className="text-xs text-sky-600 font-bold border-r border-r-gray-300 flex items-center justify-start py-2 px-2.5 flex-shrink-0 flex-col gap-0.5">
+              <span className="text-xs text-sky-700 font-bold border-r border-r-gray-300 flex items-center justify-start py-2 px-2.5 flex-shrink-0 flex-col gap-0.5">
                 <p className="text-xs capitalize">step</p>
                 <p className="text-sm capitalize">{instruction.stepNo}</p>
               </span>
