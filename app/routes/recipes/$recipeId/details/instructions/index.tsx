@@ -34,7 +34,7 @@ export default function RecipeInstructionsPage() {
         to="new"
         className={`
         absolute
-        right-2
+        right-0
         rounded
         px-2 
         py-1
@@ -88,7 +88,8 @@ export function CatchBoundary() {
           to="new"
           className={`
             rounded
-            px-0
+            -mx-2
+            px-2
             py-1
             text-xs 
             font-semibold
@@ -97,6 +98,7 @@ export function CatchBoundary() {
             delay-300
             hover:bg-sky-600 
             hover:text-white
+            w-28
             `}
         >
           Add Instruction

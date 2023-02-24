@@ -111,7 +111,6 @@ export default function NewRecipePage() {
 
           {/*  */}
           <div className="text-right flex items-center gap-4 justify-end">
-            <Link to={`..`} className="text-sm">Cancel</Link>
             <button
               type="submit"
               className="text-xs text-white py-2 px-4 rounded bg-sky-600 hover:bg-sky-500 focus:bg-sky-400 disabled:bg-sky-300"
@@ -119,6 +118,7 @@ export default function NewRecipePage() {
             >
               {isCreating ? "Saving..." : "Save"}
             </button>
+            <Link to={`..`} className="text-sm">Cancel</Link>
         </div>
       </Form>
     </div>

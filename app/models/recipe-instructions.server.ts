@@ -32,6 +32,18 @@ export async function createRecipeInstruction({
   });
 }
 
+export async function getRecipeInstruction({recipeId, instructionId}: {
+  recipeId: string,
+  instructionId: string,
+}) {
+  return prisma.recipeInstruction.findFirst({
+    where: {
+      id: instructionId,
+      recipeId
+    }
+  })
+}
+
 export async function updateRecipeInstruction({
   instructionId,
   stepNo,
@@ -60,14 +72,4 @@ export async function deleteRecipeInstruction(instructionId: string) {
   });
 }
 
-export async function getRecipeInstruction({recipeId, instructionId}: {
-  recipeId: string,
-  instructionId: string,
-}) {
-  return prisma.recipeInstruction.findFirst({
-    where: {
-      id: instructionId,
-      recipeId
-    }
-  })
-}
+

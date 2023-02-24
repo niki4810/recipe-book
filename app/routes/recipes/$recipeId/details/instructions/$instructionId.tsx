@@ -169,14 +169,6 @@ export default function AddInstructionPage() {
             )}
           </div>
           <div className={`flex items-center gap-4 ${isDeleting ? "hidden" : ""}`}>
-            {isCreating || isUpdating ? null : (
-              <Link
-                to={`../../${recipeId}/details/instructions`}
-                className="text-sm"
-              >
-                Cancel
-              </Link>
-            )}
             <button
               name="intent"
               value={isNewInstruction ? "create" : "update"}
@@ -192,6 +184,14 @@ export default function AddInstructionPage() {
                 ? "Updating..."
                 : "Update"}
             </button>
+            {isCreating || isUpdating ? null : (
+              <Link
+                to={`../../${recipeId}/details/instructions`}
+                className="text-sm"
+              >
+                Cancel
+              </Link>
+            )}
           </div>
         </div>
       </Form>

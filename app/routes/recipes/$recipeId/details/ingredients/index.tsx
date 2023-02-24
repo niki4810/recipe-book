@@ -33,8 +33,8 @@ export default function RecipeIngredientsPage() {
         to="new"
         className={`
         absolute
-          right-2
-          rounded
+        right-0
+        rounded
          px-2 
          py-1
          text-xs 
@@ -48,23 +48,36 @@ export default function RecipeIngredientsPage() {
       >
         Add Ingredient
       </Link>
-      <div className="mb-4 mt-8 flex flex-col border border-gray-400/50 bg-white pr-4 pl-6 pt-2 pb-2 text-sm shadow">
-        <ul className="list-disc">
-          {ingredients.map((ingredient) => {
-            return (
-              <li key={ingredient.id}>
-                <div className="flex items-center gap-2 p-1 text-sm">
-                  <span className="capitalize text-gray-800">
-                    {ingredient.name}
-                  </span>
-                  <span className="text-xs capitalize text-gray-500">
-                    ({ingredient.quantity} {ingredient.unit})
-                  </span>
-                </div>
-              </li>
-            );
-          })}
-        </ul>
+      <div className="mb-4 mt-10 flex flex-col gap-2.5 border border-transparent text-sm">
+        {ingredients.map((ingredient, index) => {
+          return (
+            <div
+              key={ingredient.id}
+              className="max-w-120 snap-y snap-mandatory rounded border border-gray-400/50 bg-white p-2 shadow
+          "
+            >
+              <div className="flex items-center gap-2">
+                <Link
+                  to={`${ingredient.id}`}
+                  className="flex flex-shrink-0 flex-col items-center justify-start gap-0.5 border-r border-r-gray-300 py-2 px-2.5 text-xs font-bold text-sky-700"
+                >
+                  <p className="text-xs capitalize">Item</p>
+                  <p className="text-sm capitalize">{index + 1}</p>
+                </Link>
+                <span className="text-sm capitalize text-gray-800">
+                  <div className="flex items-center gap-2 p-1 text-sm">
+                    <span className="capitalize text-gray-800">
+                      {ingredient.name}
+                    </span>
+                    <span className="text-xs capitalize text-gray-500">
+                      ({ingredient.quantity} {ingredient.unit})
+                    </span>
+                  </div>
+                </span>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
