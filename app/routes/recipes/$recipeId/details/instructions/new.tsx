@@ -40,7 +40,7 @@ export const action:ActionFunction = async ({request, params}) => {
     recipeId
   });
 
-  return redirect(`/recipes/${recipeId}/instructions`);
+  return redirect(`/recipes/${recipeId}/details/instructions`);
 }
 
 

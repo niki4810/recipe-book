@@ -28,27 +28,27 @@ export const loader: LoaderFunction = async ({
 export default function RecipeIngredientsPage() {
   const { ingredients } = useLoaderData() as unknown as LoaderData;
   return (
-    <div className="flex flex-col gap-4 relative">
+    <div className="relative flex flex-col gap-4">
       <Link
         to="new"
         className={`
-        rounded
-          px-2
-          py-1
+        absolute
+          right-2
+          rounded
+         px-2 
+         py-1
          text-xs 
-         font-semibold
+         font-semibold  
          text-sky-600 
-         hover:text-white  
-         hover:bg-sky-600 
-         absolute
-         right-2
-         delay-300 
          transition-colors
+         delay-300
+         hover:bg-sky-600 
+         hover:text-white
         `}
       >
         Add Ingredient
       </Link>
-      <div className="mb-4 flex flex-col border border-gray-400/50 bg-white pr-4 pl-6 pt-2 pb-2 text-sm shadow mt-8">
+      <div className="mb-4 mt-8 flex flex-col border border-gray-400/50 bg-white pr-4 pl-6 pt-2 pb-2 text-sm shadow">
         <ul className="list-disc">
           {ingredients.map((ingredient) => {
             return (
@@ -74,7 +74,28 @@ export default function RecipeIngredientsPage() {
 export function CatchBoundary() {
   const caught = useCatch();
   if (caught.status === 404) {
-    return <div className="text-sm text-gray-800">{caught.data}</div>;
+    return (
+      <div className="flex flex-col gap-1">
+        <div className="text-sm text-gray-800">{caught.data}.</div>
+        <Link
+          to="new"
+          className={`
+            rounded
+            px-0
+            py-1
+            text-xs 
+            font-semibold
+            text-sky-600 
+            transition-colors  
+            delay-300
+            hover:bg-sky-600 
+            hover:text-white
+            `}
+        >
+          Add Ingredient
+        </Link>
+      </div>
+    );
   }
   throw new Error(`Unsupported thrown response status code: ${caught.status}`);
 }

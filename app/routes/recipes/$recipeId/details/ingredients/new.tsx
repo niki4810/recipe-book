@@ -45,7 +45,7 @@ export const action: ActionFunction = async ({ request, params }) => {
     recipeId,
   });
 
-  return redirect(`/recipes/${recipeId}/ingredients`);
+  return redirect(`/recipes/${recipeId}/details/ingredients`);
 };
 
 export default function AddIngreditentsPage() {
