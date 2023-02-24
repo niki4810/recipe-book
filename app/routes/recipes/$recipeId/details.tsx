@@ -30,19 +30,24 @@ export default function RecipeDetailsPage() {
   const { recipe } = useLoaderData() as unknown as LoaderData;
   return (
     <div className="flex flex-col gap-4">
-      <div className="rounded border border-gray-400/50 p-2 bg-white flex flex-col gap-2 shadow">
+      <div className="rounded border border-gray-400/50 py-4 px-2 bg-white flex flex-col gap-2 shadow relative">
         <RecipeCard recipe={recipe} isLink={false}></RecipeCard>
-        <div className="flex gap-2 items-center justify-center">
-          <Link to="ingredients/new" className="text-xs text-white bg-sky-600 hover:bg-sky-500 py-1 px-2 rounded flex">
-            Add Ingredient
-          </Link>
-          <Link to="instructions/new" className="text-xs text-white bg-sky-600 hover:bg-sky-500 py-1 px-2 rounded">
-            Add Instruction
-          </Link>
-          <Link to={`../${recipe.id}/edit`} className="text-xs text-white bg-sky-600 hover:bg-sky-500 py-1 px-2 rounded">
+          <Link to={`../${recipe.id}/edit`} className={`
+            rounded
+            px-2
+            py-1
+            text-xs 
+            font-semibold
+            text-sky-600 
+            hover:text-white  
+            hover:bg-sky-600 
+            absolute
+            right-2
+            delay-300 
+            transition-colors
+        `}>
             Edit Recipe
           </Link>
-        </div>
       </div>
       <div className="flex gap-px border-b border-b-gray-300">
         <NavLink

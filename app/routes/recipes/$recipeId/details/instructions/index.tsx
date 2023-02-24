@@ -1,6 +1,6 @@
 import type { LoaderArgs, LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { useCatch, useLoaderData } from "@remix-run/react";
+import { Link, useCatch, useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 import { getRecipeInstructions } from "~/models/recipe-instructions.server";
 
@@ -29,21 +29,48 @@ export const loader: LoaderFunction = async ({
 export default function RecipeInstructionsPage() {
   const { instructions } = useLoaderData() as unknown as LoaderData;
   return (
-    <div className="text-sm mb-4 flex flex-col gap-2.5 border border-transparent">
-      {instructions.map((instruction) => {
-        return (
-          <div key={instruction.id} className="bg-white border-gray-400/50 border shadow max-w-120 rounded p-2 snap-mandatory snap-y
-          ">
-            <div className="flex items-center gap-2">
-              <span className="text-xs text-sky-700 font-bold border-r border-r-gray-300 flex items-center justify-start py-2 px-2.5 flex-shrink-0 flex-col gap-0.5">
-                <p className="text-xs capitalize">step</p>
-                <p className="text-sm capitalize">{instruction.stepNo}</p>
-              </span>
-              <span className="capitalize text-sm text-gray-800">{instruction.description}</span>
+    <div className="flex flex-col gap-4 relative">
+      <Link
+        to="new"
+        className={`
+        rounded
+        px-2
+        py-1
+        text-xs 
+        font-semibold
+        text-sky-600 
+        hover:text-white  
+        hover:bg-sky-600 
+        absolute
+        right-2
+        delay-300 
+        transition-colors
+        `}
+      >
+        Add Instruction
+      </Link>
+
+      <div className="mb-4 flex flex-col gap-2.5 border border-transparent text-sm mt-10">
+        {instructions.map((instruction) => {
+          return (
+            <div
+              key={instruction.id}
+              className="max-w-120 snap-y snap-mandatory rounded border border-gray-400/50 bg-white p-2 shadow
+          "
+            >
+              <div className="flex items-center gap-2">
+                <span className="flex flex-shrink-0 flex-col items-center justify-start gap-0.5 border-r border-r-gray-300 py-2 px-2.5 text-xs font-bold text-sky-700">
+                  <p className="text-xs capitalize">step</p>
+                  <p className="text-sm capitalize">{instruction.stepNo}</p>
+                </span>
+                <span className="text-sm capitalize text-gray-800">
+                  {instruction.description}
+                </span>
+              </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   );
 }
@@ -62,5 +89,7 @@ export function ErrorBoundary({ error }: { error: Error }) {
   if (error instanceof Error) {
     return <div className="text-sm text-red-600">{error.message}</div>;
   }
-  return <div className="text-sm text-red-600">Oh no, something went wrong!</div>;
+  return (
+    <div className="text-sm text-red-600">Oh no, something went wrong!</div>
+  );
 }

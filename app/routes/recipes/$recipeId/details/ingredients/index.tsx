@@ -1,6 +1,6 @@
 import type { LoaderArgs, LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { useCatch, useLoaderData } from "@remix-run/react";
+import { Link, useCatch, useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 import { getRecipeIngredients } from "~/models/recipe-ingredients.server";
 import { requireUserId } from "~/session.server";
@@ -28,23 +28,44 @@ export const loader: LoaderFunction = async ({
 export default function RecipeIngredientsPage() {
   const { ingredients } = useLoaderData() as unknown as LoaderData;
   return (
-    <div className="mb-4 border border-gray-400/50 bg-white pr-4 pl-6 pt-2 pb-2 text-sm shadow flex flex-col">
-      <ul className="list-disc">
-        {ingredients.map((ingredient) => {
-          return (
-            <li key={ingredient.id}>
-              <div className="flex items-center gap-2 p-1 text-sm">
-                <span className="capitalize text-gray-800">
-                  {ingredient.name}
-                </span>
-                <span className="text-xs capitalize text-gray-500">
-                  ({ingredient.quantity} {ingredient.unit})
-                </span>
-              </div>
-            </li>
-          );
-        })}
-      </ul>
+    <div className="flex flex-col gap-4 relative">
+      <Link
+        to="new"
+        className={`
+        rounded
+          px-2
+          py-1
+         text-xs 
+         font-semibold
+         text-sky-600 
+         hover:text-white  
+         hover:bg-sky-600 
+         absolute
+         right-2
+         delay-300 
+         transition-colors
+        `}
+      >
+        Add Ingredient
+      </Link>
+      <div className="mb-4 flex flex-col border border-gray-400/50 bg-white pr-4 pl-6 pt-2 pb-2 text-sm shadow mt-8">
+        <ul className="list-disc">
+          {ingredients.map((ingredient) => {
+            return (
+              <li key={ingredient.id}>
+                <div className="flex items-center gap-2 p-1 text-sm">
+                  <span className="capitalize text-gray-800">
+                    {ingredient.name}
+                  </span>
+                  <span className="text-xs capitalize text-gray-500">
+                    ({ingredient.quantity} {ingredient.unit})
+                  </span>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
     </div>
   );
 }

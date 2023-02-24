@@ -21,7 +21,18 @@ export default function RecipesIndexPage() {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex justify-end">
-        <Link to="new" className="text-xs text-white bg-sky-600 hover:bg-sky-500 py-1 px-4 rounded">
+        <Link to="new" className={`
+            rounded
+            px-2
+            py-1
+            text-xs 
+            font-semibold
+            text-sky-600 
+            hover:text-white  
+            hover:bg-sky-600 
+            delay-300 
+            transition-colors
+        `}>
           + New Recipe
         </Link>
       </div>
@@ -30,7 +41,7 @@ export default function RecipesIndexPage() {
           return (
             <div
               key={recipe.id}
-              className="rounded border border-gray-400/50 p-2 bg-white flex flex-col gap-2 shadow"
+              className="rounded border border-gray-400/50 py-4 px-2 bg-white flex flex-col gap-2 shadow"
             >
               <RecipeCard to={`${recipe.id}/details`} recipe={recipe} isLink></RecipeCard>
             </div>
