@@ -59,10 +59,12 @@ export default function RecipeInstructionsPage() {
           "
             >
               <div className="flex items-center gap-2">
-                <span className="flex flex-shrink-0 flex-col items-center justify-start gap-0.5 border-r border-r-gray-300 py-2 px-2.5 text-xs font-bold text-sky-700">
+                <Link 
+                  to={`${instruction.id}`}
+                  className="flex flex-shrink-0 flex-col items-center justify-start gap-0.5 border-r border-r-gray-300 py-2 px-2.5 text-xs font-bold text-sky-700">
                   <p className="text-xs capitalize">step</p>
                   <p className="text-sm capitalize">{instruction.stepNo}</p>
-                </span>
+                </Link>
                 <span className="text-sm capitalize text-gray-800">
                   {instruction.description}
                 </span>

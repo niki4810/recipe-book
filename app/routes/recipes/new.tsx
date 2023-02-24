@@ -1,7 +1,6 @@
 import { Form, Link, useActionData, useTransition } from "@remix-run/react";
 import type { ActionFunction } from "@remix-run/node";
 import { redirect, json } from "@remix-run/node";
-import React from "react";
 import { createRecipe } from "~/models/recipes.server";
 import { requireUserId } from "~/session.server";
 import invariant from "tiny-invariant";
