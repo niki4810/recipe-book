@@ -32,7 +32,7 @@ export default function RecipesIndexPage() {
               key={recipe.id}
               className="rounded border border-gray-400/50 p-2 bg-white flex flex-col gap-2 shadow"
             >
-              <RecipeCard recipe={recipe} isLink></RecipeCard>
+              <RecipeCard to={`${recipe.id}/details`} recipe={recipe} isLink></RecipeCard>
             </div>
           );
         })}

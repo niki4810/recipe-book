@@ -29,19 +29,21 @@ export const loader: LoaderFunction = async ({
 export default function RecipeDetailsPage() {
   const { recipe } = useLoaderData() as unknown as LoaderData;
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-4">
       <div className="rounded border border-gray-400/50 p-2 bg-white flex flex-col gap-2 shadow">
         <RecipeCard recipe={recipe} isLink={false}></RecipeCard>
-        <div className="flex gap-2 items-center justify-end">
-          <Link to="ingredients/new" className="text-xs text-white bg-sky-600 hover:bg-sky-500 py-1 px-4 rounded">
+        <div className="flex gap-2 items-center justify-center">
+          <Link to="ingredients/new" className="text-xs text-white bg-sky-600 hover:bg-sky-500 py-1 px-2 rounded flex">
             Add Ingredient
           </Link>
-          <Link to="instructions/new" className="text-xs text-white bg-sky-600 hover:bg-sky-500 py-1 px-4 rounded">
+          <Link to="instructions/new" className="text-xs text-white bg-sky-600 hover:bg-sky-500 py-1 px-2 rounded">
             Add Instruction
+          </Link>
+          <Link to={`../${recipe.id}/edit`} className="text-xs text-white bg-sky-600 hover:bg-sky-500 py-1 px-2 rounded">
+            Edit Recipe
           </Link>
         </div>
       </div>
-      <hr className="h-px border-b-gray-300 border-b mt-2 mb-1" />
       <div className="flex gap-px border-b border-b-gray-300">
         <NavLink
           to="ingredients"

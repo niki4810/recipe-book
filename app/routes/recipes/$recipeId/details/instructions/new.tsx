@@ -65,7 +65,7 @@ export default function AddInstructionPage() {
               min={1}
               type="number"
               name="stepNo"
-              className="flex-1 rounded-md border-2 border-sky-600 px-2 text-lg leading-loose"
+              className="flex-1 rounded-md border-2 border-sky-600 px-2 text-sm leading-loose"
             />
           </label>
         </div>
@@ -79,7 +79,7 @@ export default function AddInstructionPage() {
             <textarea
               rows={3}
               name="description"
-              className="flex-1 rounded-md border-2 border-sky-600 px-3 text-lg leading-loose"
+              className="flex-1 rounded-md border-2 border-sky-600 px-3 text-sm leading-loose"
             />
           </label>
         </div>

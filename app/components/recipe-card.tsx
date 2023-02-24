@@ -5,12 +5,14 @@ import React from "react";
 export default function RecipeCard({
   recipe,
   isLink = true,
+  to=""
 }: {
   recipe: Pick<
     Recipe,
     "id" | "description" | "createdAt" | "durationInMins" | "name" | "imageUrl"
   >;
   isLink: boolean;
+  to?: string;
 }) {
   return (
     <div className="flex items-center gap-2">
@@ -22,7 +24,7 @@ export default function RecipeCard({
       />
       <div className="flex flex-1 flex-col px-2">
         {isLink ? (
-          <Link to={recipe.id} className="text-md font-semibold text-sky-700">
+          <Link to={to} className="text-md font-semibold text-sky-700">
             {recipe.name}
           </Link>
         ) : (
@@ -35,9 +37,9 @@ export default function RecipeCard({
           <span className="flex-1 text-xs font-bold text-gray-600">
             Duration {recipe.durationInMins} mins
           </span>
-          <span className="text-xs font-bold  text-gray-500">
+          {/* <span className="text-xs font-bold  text-gray-500">
             {new Date(recipe.createdAt).toDateString()}
-          </span>
+          </span> */}
         </div>
         <p className="mt-1 self-start text-sm text-gray-600">
           {recipe.description}

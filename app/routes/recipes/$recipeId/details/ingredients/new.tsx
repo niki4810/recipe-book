@@ -68,7 +68,7 @@ export default function AddIngreditentsPage() {
             </span>
             <input
               name="name"
-              className="flex-1 rounded-md border-2 border-sky-600 px-2 text-lg leading-loose"
+              className="flex-1 rounded-md border-2 border-sky-600 px-2 text-sm leading-loose"
             />
           </label>
         </div>
@@ -84,7 +84,7 @@ export default function AddIngreditentsPage() {
               min={1}
               type="number"
               name="quantity"
-              className="flex-1 rounded-md border-2 border-sky-600 px-2 text-lg leading-loose"
+              className="flex-1 rounded-md border-2 border-sky-600 px-2 text-sm leading-loose"
             />
           </label>
         </div>
@@ -98,7 +98,7 @@ export default function AddIngreditentsPage() {
             </span>
             <select
               name="unit"
-              className="flex-1 rounded-md border-2 border-sky-600 px-2 text-lg leading-loose"
+              className="flex-1 rounded-md border-2 border-sky-600 px-2 text-sm leading-loose"
             >
               <option id="tablespoon" value="tablespoon">
                 tablespoon

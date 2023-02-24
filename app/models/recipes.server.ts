@@ -50,3 +50,20 @@ export async function createRecipe(
     }
   })
 }
+
+export async function updateRecipe(
+  recipe: Pick<Recipe, "name" | "description" | "imageUrl" | "durationInMins">,
+  recipeId: string
+  ) {
+  return prisma.recipe.update({
+    data: {
+      name: recipe.name,
+      description: recipe.description,
+      imageUrl: recipe.imageUrl,
+      durationInMins: recipe.durationInMins
+    },
+    where: {
+      id: recipeId
+    }
+  });
+}
