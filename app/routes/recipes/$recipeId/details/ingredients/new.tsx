@@ -1,4 +1,4 @@
-import { Form, useActionData, useTransition } from "@remix-run/react";
+import { Form, Link, useActionData, useTransition } from "@remix-run/react";
 import type { ActionFunction } from "@remix-run/node";
 import { redirect, json } from "@remix-run/node";
 import { createRecipeIngredient } from "~/models/recipe-ingredients.server";
@@ -125,7 +125,8 @@ export default function AddIngreditentsPage() {
           </label>
         </div>
 
-        <div className="text-right">
+        <div className="text-right flex items-center gap-4 justify-end">
+            <Link to={`..`} className="text-sm">Cancel</Link>
           <button
             type="submit"
             className="text-xs text-white bg-sky-600 hover:bg-sky-500 py-2 px-4 rounded  focus:bg-sky-400 disabled:bg-sky-300"

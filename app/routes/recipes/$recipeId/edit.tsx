@@ -1,4 +1,10 @@
-import { Form, useActionData, useLoaderData, useTransition } from "@remix-run/react";
+import {
+  Form,
+  Link,
+  useActionData,
+  useLoaderData,
+  useTransition,
+} from "@remix-run/react";
 import type {
   ActionFunction,
   LoaderArgs,
@@ -82,7 +88,7 @@ export default function EditRecipePage() {
   const transition = useTransition();
   const isCreating = Boolean(transition.submission);
   const { recipe } = useLoaderData() as unknown as LoaderData;
-  
+
   return (
     <div className="flex flex-col gap-4 pt-4">
       <h2 className="text-md font-bold">Edit Recipe</h2>
@@ -146,7 +152,8 @@ export default function EditRecipePage() {
         </div>
 
         {/*  */}
-        <div className="text-right">
+        <div className="text-right flex items-center gap-4 justify-end">
+          <Link to={`../${recipe.id}/details`} className="text-sm">Cancel</Link>
           <button
             type="submit"
             className="rounded bg-sky-600 py-2 px-4 text-xs text-white hover:bg-sky-500 focus:bg-sky-400 disabled:bg-sky-300"
