@@ -11,7 +11,7 @@ import type {
   LoaderFunction,
 } from "@remix-run/node";
 import { redirect, json } from "@remix-run/node";
-import { updateRecipe, getRecipe } from "~/models/recipes.server";
+import { updateRecipe, getRecipe, deleteRecipe } from "~/models/recipes.server";
 import { requireUserId } from "~/session.server";
 import invariant from "tiny-invariant";
 
@@ -32,6 +32,12 @@ export const action: ActionFunction = async ({ request, params }) => {
   const { recipeId } = params;
   invariant(recipeId, "Recipe Id is required");
   const formData = await request.formData();
+  const intent = formData.get("intent");
+
+  if (intent === "delete") {
+    await deleteRecipe(recipeId);
+    return redirect(`/recipes`);
+  }
   const name = formData.get("name");
   const description = formData.get("description");
   const imageUrl =
@@ -75,9 +81,9 @@ export const loader: LoaderFunction = async ({
   request,
   params,
 }: LoaderArgs) => {
+  const userId = await requireUserId(request);
   const { recipeId } = params;
   invariant(recipeId, "Recipe Id is required");
-  const userId = await requireUserId(request);
   const recipe = await getRecipe({ id: recipeId, userId });
   invariant(recipe, `Recipe not found: ${recipeId}`);
   return json<LoaderData>({ recipe });
@@ -85,9 +91,11 @@ export const loader: LoaderFunction = async ({
 
 export default function EditRecipePage() {
   const errors = useActionData() as ActionData;
-  const transition = useTransition();
-  const isCreating = Boolean(transition.submission);
   const { recipe } = useLoaderData() as unknown as LoaderData;
+
+  const transition = useTransition();
+  const isUpdating = transition.submission?.formData.get("intent") === "update";
+  const isDeleting = transition.submission?.formData.get("intent") === "delete";
 
   return (
     <div className="flex flex-col gap-4 pt-4">
@@ -151,15 +159,36 @@ export default function EditRecipePage() {
           </label>
         </div>
 
-        <div className="text-right flex items-center gap-4 justify-end">
-          <button
-            type="submit"
-            className="rounded bg-sky-600 py-2 px-4 text-xs text-white hover:bg-sky-500 focus:bg-sky-400 disabled:bg-sky-300"
-            disabled={isCreating}
+        <div className="flex items-center justify-start gap-4">
+          <div className="flex-1">
+              <button
+                name="intent"
+                value={"delete"}
+                type="submit"
+                className="rounded bg-red-600 py-2 px-4 text-xs text-white hover:bg-red-500  focus:bg-red-400 disabled:bg-red-300"
+                disabled={isDeleting}
+              >
+                {isDeleting ? "Deleting..." : "Delete"}
+              </button>
+          </div>
+          <div
+            className={`flex items-center gap-4 ${isDeleting ? "hidden" : ""}`}
           >
-            {isCreating ? "Saving..." : "Save"}
-          </button>
-          <Link to={`../${recipe.id}/details`} className="text-sm">Cancel</Link>
+            <button
+              name="intent"
+              value={"update"}
+              type="submit"
+              className="rounded bg-sky-600 py-2 px-4 text-xs text-white hover:bg-sky-500  focus:bg-sky-400 disabled:bg-sky-300"
+              disabled={isUpdating}
+            >
+              {isUpdating ? "Updating..." : "Update"}
+            </button>
+            {isUpdating ? null : (
+              <Link to={`../${recipe.id}/details`} className="text-sm">
+                Cancel
+              </Link>
+            )}
+          </div>
         </div>
       </Form>
     </div>

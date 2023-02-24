@@ -67,3 +67,17 @@ export async function updateRecipe(
     }
   });
 }
+
+export async function deleteRecipe(recipeId: string) {
+  await prisma.recipeIngredient.deleteMany({
+    where: {recipeId}
+  });
+
+  await prisma.recipeInstruction.deleteMany({
+    where: {recipeId}
+  });
+
+  return await prisma.recipe.delete({
+    where: {id: recipeId}
+  });
+}
