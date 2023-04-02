@@ -80,7 +80,7 @@ export default function LoginPage() {
   }, [actionData]);
 
   return (
-    <div className="flex min-h-full flex-col justify-center">
+    <div className="flex min-h-full flex-col justify-start mt-14">
       <div className="mx-auto w-full max-w-md px-8">
         <Form method="post" className="space-y-6">
           <div>
@@ -102,6 +102,7 @@ export default function LoginPage() {
                 aria-invalid={actionData?.errors?.email ? true : undefined}
                 aria-describedby="email-error"
                 className="w-full rounded border border-gray-500 px-2 py-1 text-sm"
+                defaultValue={"test@rb.com"}
               />
               {actionData?.errors?.email && (
                 <div className="pt-1 text-red-700" id="email-error">
@@ -128,6 +129,7 @@ export default function LoginPage() {
                 aria-invalid={actionData?.errors?.password ? true : undefined}
                 aria-describedby="password-error"
                 className="w-full rounded border border-gray-500 px-2 py-1 text-sm"
+                defaultValue={"Test1234!"}
               />
               {actionData?.errors?.password && (
                 <div className="pt-1 text-red-700" id="password-error">

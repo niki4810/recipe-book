@@ -4,7 +4,7 @@ import bcrypt from "bcryptjs";
 const prisma = new PrismaClient();
 
 async function seed() {
-  const email = "nikhilesh@rbn.com";
+  const email = "test@rb.com";
 
   // cleanup the existing database
   await prisma.user.delete({ where: { email } }).catch(() => {
@@ -56,9 +56,9 @@ async function seed() {
   const recipeOne = await prisma.recipe.create({
     data: {
       imageUrl: "https://via.placeholder.com/200",
-      name: "Mirchi Ka Salan",
+      name: "Mixed Vegetable Curry",
       durationInMins: 60,
-      description: "Authentic Telengana curry. Goes well with flavored rice",
+      description: "Authentic Indian Vegetable curry. Goes well with flavored rice",
       userId: user.id
     }
   });
