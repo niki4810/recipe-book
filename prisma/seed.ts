@@ -27,7 +27,7 @@ async function seed() {
 
   // delete existing recipe along with its ingredients and instructions
   const recipe = await prisma.recipe.findFirst({where: {
-    name: "Mirchi Ka Salan",
+    name: "Mixed Vegetable Curry",
     userId: user.id
   }});
 
